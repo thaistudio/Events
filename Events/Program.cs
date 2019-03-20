@@ -33,7 +33,7 @@ namespace Events
     public class Squad
     {
         public List<Player> players;
-
+        public event EventHandler<string> UpdateEvent;
         public Squad()
         {
             players = new List<Player>();
@@ -55,6 +55,11 @@ namespace Events
                 return false;
             else
                 return true;
+        }
+
+        public void eventMethod()
+        {
+            UpdateEvent?.Invoke(this, "aaaa");
         }
     }
 }

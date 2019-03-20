@@ -12,7 +12,7 @@ namespace Events
 {
     public partial class Form1 : Form
     {
-        public Squad squad;
+        public Squad squad = new Squad();
         public List<Player> playersForm1;
         public List<string> name = new List<string>();
         public List<int> numbers = new List<int>();
@@ -24,13 +24,14 @@ namespace Events
 
             CreateSquad();
             UpdateSquad();
+            nutin();
            
 
         }
 
         public void CreateSquad()
         {
-            squad = new Squad();
+            //squad = new Squad();
             playersForm1 = squad.CreateSquad();
         }
 
@@ -68,25 +69,28 @@ namespace Events
         {
             
         }
-        public event EventHandler<string> UpdateEvent;
-        AddPlayerForm addPlayerForm = new AddPlayerForm();
+        
+        
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            AddPlayerForm addPlayerForm = new AddPlayerForm(squad);
             addPlayerForm.Show();
         }
 
         public void nutin()
         {
-            UpdateEvent += AddPlayerForm_UpdateEvent;
+            squad.UpdateEvent += AddPlayerForm_UpdateEvent;
         }
 
         public void clear()
         {
-            UpdateEvent?.Invoke(this, "aaaa");
             
-        }
 
+        }
+        public void add()
+        {
+            listBox1.Items.Clear();
+        }
         private void AddPlayerForm_UpdateEvent(object sender, string e)
         {
             listBox1.Items.Clear();
@@ -94,7 +98,7 @@ namespace Events
 
         private void button2_Click(object sender, EventArgs e)
         {
-            clear();
+            add();
         }
     }
 }
