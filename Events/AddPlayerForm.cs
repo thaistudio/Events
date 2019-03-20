@@ -13,9 +13,13 @@ namespace Events
    
     public partial class AddPlayerForm : Form
     {
+        
         Squad squad = new Squad();
         List<Player> updatePlayers = new List<Player>();
 
+        List<string> newName = new List<string>();
+        List<int> newNumber = new List<int>();
+        List<int> newAttribute = new List<int>();
 
         public AddPlayerForm()
         {
@@ -26,14 +30,10 @@ namespace Events
         {
 
             Form1 form1 = new Form1();
-            form1.playersForm1.Add(new Player() { Name = nameBox.Text, Number = Convert.ToInt32(numberBox.Text), Attribute = Convert.ToInt32(attributeBox.Text) });
-            form1.UpdateSquad();
-            //foreach (Player player in form1.playersForm1)
-            //{
-            //    form1.name.Add(nameBox.Text);
-            //    form1.numbers.Add(Convert.ToInt32(numberBox.Text));
-            //    form1.attributes.Add(Convert.ToInt32(attributeBox.Text));
-            //}
+            //form1.playersForm1.Add(new Player() { Name = nameBox.Text, Number = Convert.ToInt32(numberBox.Text), Attribute = Convert.ToInt32(attributeBox.Text) });
+            //form1.AddNewPlayer(nameBox.Text, Convert.ToInt32(numberBox.Text), Convert.ToInt32(attributeBox.Text));
+            form1.clear();
+            
         }
     }
 }

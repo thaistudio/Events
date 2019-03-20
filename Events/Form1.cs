@@ -22,15 +22,9 @@ namespace Events
         {
             InitializeComponent();
 
-            // Default player name, number, attribute
-
             CreateSquad();
             UpdateSquad();
-            
-            
-
-            //AddPlayerForm add = new AddPlayerForm();
-            //add.updateSquad();
+           
 
         }
 
@@ -48,15 +42,23 @@ namespace Events
 
             foreach (Player player in playersForm1)
             {
-                name.Add(player.Name);
-                numbers.Add(player.Number);
-                attributes.Add(player.Attribute);
+                listBox1.Items.Add(player.Name);
+                listBox2.Items.Add(player.Number);
+                listBox3.Items.Add(player.Attribute);
             }
-            listBox1.DataSource = name;
-            listBox2.DataSource = numbers;
-            listBox3.DataSource = attributes;
+            //listBox1.DataSource = name;
+            //listBox2.DataSource = numbers;
+            //listBox3.DataSource = attributes;
         }
 
+        public void AddNewPlayer(string name, int number, int att)
+        {
+            listBox1.Items.Add(name);
+            listBox1.Refresh();
+            listBox1.Update();
+            listBox2.Items.Add(number);
+            listBox3.Items.Add(att);
+        }
         private void label2_Click(object sender, EventArgs e)
         {
            
@@ -66,11 +68,33 @@ namespace Events
         {
             
         }
-
+        public event EventHandler<string> UpdateEvent;
+        AddPlayerForm addPlayerForm = new AddPlayerForm();
         private void button1_Click(object sender, EventArgs e)
         {
-            AddPlayerForm addPlayerForm = new AddPlayerForm();
+            
             addPlayerForm.Show();
+        }
+
+        public void nutin()
+        {
+            UpdateEvent += AddPlayerForm_UpdateEvent;
+        }
+
+        public void clear()
+        {
+            UpdateEvent?.Invoke(this, "aaaa");
+            
+        }
+
+        private void AddPlayerForm_UpdateEvent(object sender, string e)
+        {
+            listBox1.Items.Clear();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            clear();
         }
     }
 }
